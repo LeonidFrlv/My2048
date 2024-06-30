@@ -1,5 +1,5 @@
 import styles from './App.module.css';
-import GameField from "./component/GameField/GameField";
+import GameField from "./components/GameField/GameField";
 import {useEffect, useState} from "react";
 import {countRows, gameOver, randomSpawn} from "./scripts";
 
@@ -15,7 +15,7 @@ const keyboardRight = { "d": true, "D": true, "ArrowRight": true };
 const keyboardDown = { "s": true, "S": true, "ArrowDown": true };
 const keyboardLeft = { "a": true, "A": true, "ArrowLeft": true };
 
-const Header = () => (
+const Header = () => ( //тут цвет текста просто чёрный - поменяй
   <header className={styles.appHeader}>
     <h1>Simple 2048</h1>
     <h3>by s1queence</h3>
@@ -23,7 +23,7 @@ const Header = () => (
 )
 
 const Button = ({setCells, setGame}) => {
-  const onClick = () => {
+  const onClick = () => { //вот этот онклик будет переиспользоваться потом
     setCells(emptyCells);
     setGame(true);
     randomSpawn(setCells);
@@ -32,14 +32,13 @@ const Button = ({setCells, setGame}) => {
 
   return (
     <button onClick={onClick}>
-      <h1>НОВАЯ ИГРА ↻</h1>
+      <h1>НОВАЯ ИГРА</h1>
     </button>
   )
 }
 
 function App() {
   const [cells, setCells] = useState(emptyCells);
-
   const [game, setGame] = useState(false);
 
   const getDirection = (key) => {

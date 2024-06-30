@@ -11,7 +11,7 @@ const countY = (dir, arr) => {
 
 	columns = columns.map((row) => countX(dir === "up" ? "left" : "right", row));
 
-	const buffer = [[], [], [], []];
+	const buffer = [[], [], [], []]; //какие нафик два цикла, придумай чёт с этим
 
 	columns.forEach(row => {
 		row.forEach((item, x) => {
@@ -27,7 +27,7 @@ const countX = (dir, row) => { // сюда должен не row передав�
 
 	const isRight = dir === "right";
 
-	let [start, end, step] = isRight ? [row.length - 1, -1, -1] : [0, row.length, 1]; // надо это переделать
+	let [start, end, step] = isRight ? [row.length - 1, -1, -1] : [0, row.length, 1]; // надо это переделать потому что непонятно что на экране вообще
 
 	for (let i = start; isRight ? i > end : i < end; i += step) {
 		if (row[i] !== row[i + 1]) continue;
