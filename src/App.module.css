@@ -1,0 +1,12 @@
+.appContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.appHeader {
+    width: 100%;
+    padding: 20px 20px 0 20px;
+}
+

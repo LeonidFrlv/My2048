@@ -1,13 +1,48 @@
-body {
+* {
+  box-sizing: border-box;
+  background: none;
+  outline: none;
+  border: none;
+  padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "Comic Sans MS", sans-serif;
+  user-select: none;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+  font-family: "Comic Sans MS";
+  src: url("./assets/fonts/Comic Sans MS.ttf");
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  background: #F2F2EF;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+:root {
+  --page_background: #F2F2EF;
+  --game_background: #C69E76;
+  --cell_font-color: #F2F2EF;
+  --black_cell_font-color: #524B4B;
+  --empty_cell_color: #D8C6A1;
+  --2_cell_color: #CACAC9;
+  --4_cell_color: #B8B6AE;
+  --8_cell_color: #A9A9A4;
+  --16_cell_color: #AC6A63;
+  --32_cell_color: #815959;
+  --64_cell_color: #84433E;
+  --bigint_cell_color: #E80033;
+  --border_radius: 8px;
+}
+
+button {
+  cursor: pointer;
 }

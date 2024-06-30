@@ -1,0 +1,45 @@
+.gameCell {
+    font-size: 50px;
+    border-radius: var(--border_radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--cell_font-color);
+}
+
+.color2 {
+    background: var(--2_cell_color);
+    color: var(--black_cell_font-color);
+}
+
+.color4 {
+    background: var(--4_cell_color);
+    color: var(--black_cell_font-color);
+}
+
+.color8 {
+    background: var(--8_cell_color);
+    color: var(--black_cell_font-color);
+}
+
+.color16 {
+    background: var(--16_cell_color);
+}
+
+.color32 {
+    background: var(--32_cell_color);
+}
+
+.color64 {
+    background: var(--64_cell_color);
+}
+
+.emptyColor {
+    background: var(--empty_cell_color);
+    color: var(--empty_cell_color);
+}
+
+.bigIntColor {
+    background: var(--bigint_cell_color);
+}
