@@ -77,8 +77,12 @@ const isCellsChanged = (oldCells, cells) => {
 	return JSON.stringify(oldCells) !== JSON.stringify(cells);
 }
 
+const copyArr = (arr) => {
+	return JSON.parse(JSON.stringify(arr));
+}
+
 const countRows = (dir, setCells, cells) => {
-	const oldCells = JSON.parse(JSON.stringify(cells));
+	const oldCells = copyArr(cells);
 
 	setCells(prevCells => {
 		if (dir === "up" || dir === "down") prevCells = countY(dir, [...prevCells]);
@@ -90,4 +94,4 @@ const countRows = (dir, setCells, cells) => {
 	});
 }
 
-export {countRows, randomSpawn, gameOver};
+export {countRows, randomSpawn, gameOver, copyArr};

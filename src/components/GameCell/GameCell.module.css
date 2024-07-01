@@ -5,22 +5,22 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: var(--cell_font-color);
+    color: var(--cell_font_color);
 }
 
 .color2 {
     background: var(--2_cell_color);
-    color: var(--black_cell_font-color);
+    color: var(--black_cell_font_color);
 }
 
 .color4 {
     background: var(--4_cell_color);
-    color: var(--black_cell_font-color);
+    color: var(--black_cell_font_color);
 }
 
 .color8 {
     background: var(--8_cell_color);
-    color: var(--black_cell_font-color);
+    color: var(--black_cell_font_color);
 }
 
 .color16 {

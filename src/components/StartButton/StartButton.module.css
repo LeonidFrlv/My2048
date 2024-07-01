@@ -1,0 +1,13 @@
+.btn {
+    font-size: 30px;
+    background: var(--game_background);
+    color: var(--cell_font_color);
+    border-radius: var(--border_radius);
+    padding: 10px 20px;
+    transition: all .5s;
+
+    &:hover{
+        background: var(--empty_cell_color);
+    }
+}
+

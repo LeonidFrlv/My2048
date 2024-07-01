@@ -7,6 +7,7 @@
   margin: 0;
   font-family: "Comic Sans MS", sans-serif;
   user-select: none;
+  color: #171A1D;
 }
 
 @font-face {
@@ -17,7 +18,7 @@
 body {
   width: 100%;
   height: 100vh;
-  background: #F2F2EF;
+  background: var(--page_background);
 }
 
 #root {
@@ -29,17 +30,17 @@ body {
 
 :root {
   --page_background: #F2F2EF;
-  --game_background: #C69E76;
-  --cell_font-color: #F2F2EF;
-  --black_cell_font-color: #524B4B;
-  --empty_cell_color: #D8C6A1;
-  --2_cell_color: #CACAC9;
-  --4_cell_color: #B8B6AE;
-  --8_cell_color: #A9A9A4;
-  --16_cell_color: #AC6A63;
-  --32_cell_color: #815959;
-  --64_cell_color: #84433E;
-  --bigint_cell_color: #E80033;
+  --game_background: #6B5B41;
+  --cell_font_color: #F2F2EF;
+  --black_cell_font_color: #171A1D;
+  --empty_cell_color: #827E6F;
+  --2_cell_color: #83AE93;
+  --4_cell_color: #A5A652;
+  --8_cell_color: #9C711C;
+  --16_cell_color: #6B453B;
+  --32_cell_color: #60292F;
+  --64_cell_color: #712B1E;
+  --bigint_cell_color: #832323;
   --border_radius: 8px;
 }
 
