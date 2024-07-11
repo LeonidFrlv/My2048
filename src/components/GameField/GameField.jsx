@@ -1,13 +1,13 @@
 import styles from "./GameField.module.css";
 import GameCell from "../GameCell/GameCell";
 
-const GameField = ({cells}) => {
+const GameField = ({ cells, spawnIndex }) => {
  return (
   <div className={styles.gameField}>
-		{cells.map((row, index) => (
-			row.map((value, cellIndex) => (
-				<GameCell key={index + cellIndex} value={value} />
-			))
+		{cells.map((row, y) => (
+			row.map((value, x) => {
+				return spawnIndex.y === y && spawnIndex.x === x ? <GameCell key={y + "_" + x} value={value} isJustSpawned={true} /> : <GameCell key={y + "_" + x} value={value} />
+			})
 		))}
   </div>
  );

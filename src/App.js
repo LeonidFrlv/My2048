@@ -16,6 +16,7 @@ function App() {
   const [cells, setCells] = useState(copyArr(emptyCells));
   const [game, setGame] = useState(false);
   const [win, setWin] = useState(false);
+  const [spawnIndex, setSpawnIndex] = useState({y: -1, x: -1});
 
   const getDirection = (key) => {
     if (keyboardUp[key]) return "up";
@@ -27,7 +28,7 @@ function App() {
   useEffect(() => {
     document.onkeyup = (e) => {
       if (!game) return;
-      countRows(getDirection(e.key), setCells, cells);
+      countRows(getDirection(e.key), setCells, cells, setSpawnIndex);
     }
   });
 
@@ -41,15 +42,14 @@ function App() {
 
     if (isGameOver(cells)) setGame(false);
 
-
   }, [game, cells])
 
   return (
     <div className={styles.appContainer}>
       <Header />
-      <GameField cells={cells}/>
+      <GameField cells={cells} spawnIndex={spawnIndex} />
       {win && <h1>Вы победили!</h1>}
-      <StartButton game={game} setGame={setGame} setCells={setCells} setWin={setWin} />
+      <StartButton game={game} setGame={setGame} setCells={setCells} setWin={setWin} setSpawnIndex={setSpawnIndex}/>
     </div>
   );
 }

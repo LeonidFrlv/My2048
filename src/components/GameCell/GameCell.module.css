@@ -5,7 +5,27 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    align-self: center;
+    justify-self: center;
+    width: 100%;
+    height: 100%;
     color: var(--cell_font_color);
+}
+
+.isJustSpawned {
+    animation: .1s spawn;
+}
+
+@keyframes spawn {
+    from {
+        width: 0;
+        height: 0;
+    }
+
+    to {
+        width: 100%;
+        height: 100%;
+    }
 }
 
 .color2 {

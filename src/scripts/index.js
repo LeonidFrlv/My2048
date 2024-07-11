@@ -1,6 +1,5 @@
 import {WIN_NUM, MAX_ROW_LENGTH} from "../constants";
 
-
 const countY = (dir, arr) => {
 	let columns = [[], [], [], []];
 
@@ -48,7 +47,6 @@ const countX = (dir, arr) => {
 
 const getRandomIndex = (cells) => {
 	const emptyIndexes = [];
-	if (!cells) return false;
 
 	cells.forEach((row, y) => {
 		row.forEach((cell, x) => {
@@ -59,12 +57,14 @@ const getRandomIndex = (cells) => {
 	return emptyIndexes.length && emptyIndexes[Math.floor(Math.random() * emptyIndexes.length)];
 }
 
-const randomSpawn = (setCells) => {
+const randomSpawn = (setCells, setSpawnIndex) => {
 	const value = Math.random() > 0.7 ? 4 : 2;
 
 	setCells(prevCells => {
 		const randomItemIndex = getRandomIndex(prevCells);
 		if (!randomItemIndex) return prevCells;
+
+		setSpawnIndex(randomItemIndex);
 
 		const newCells = [...prevCells];
 		newCells[randomItemIndex.y][randomItemIndex.x] = value;
@@ -102,14 +102,14 @@ const copyArr = (arr) => {
 	return JSON.parse(JSON.stringify(arr));
 }
 
-const countRows = (dir, setCells, cells) => {
+const countRows = (dir, setCells, cells, setSpawnIndex) => {
 	const oldCells = copyArr(cells);
 
 	setCells(prevCells => {
 		if (dir === "up" || dir === "down") prevCells = countY(dir, [...prevCells]);
 		if (dir === "right" || dir === "left") prevCells = countX(dir, [...prevCells]);
 
-		if (isCellsChanged(oldCells, prevCells)) randomSpawn(setCells);
+		if (isCellsChanged(oldCells, prevCells)) randomSpawn(setCells, setSpawnIndex);
 
 		return prevCells;
 	});

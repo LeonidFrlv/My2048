@@ -2,12 +2,12 @@ import {copyArr, randomSpawn} from "../../scripts";
 import {emptyCells} from "../../constants";
 import styles from "./StartButton.module.css";
 
-const StartButton = ({game, setGame, setCells, setWin}) => {
+const StartButton = ({game, setGame, setCells, setWin, setSpawnIndex}) => {
 	const startNewGame = () => {
 		setCells(copyArr(emptyCells));
 		setGame(true);
-		randomSpawn(setCells);
-		randomSpawn(setCells);
+		randomSpawn(setCells, setSpawnIndex);
+		randomSpawn(setCells, setSpawnIndex);
 		setWin(false)
 	}
 

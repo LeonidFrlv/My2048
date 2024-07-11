@@ -2,10 +2,11 @@ import styles from './GameCell.module.css';
 import cx from 'classnames';
 
 
-const GameCell = ({value}) => (
+const GameCell = ({ value, isJustSpawned }) => (
 	  <div className={
 				cx(
 					styles.gameCell,
+					isJustSpawned && styles.isJustSpawned,
 					value === 0 ? styles.emptyColor :
 					value === 2 ? styles.color2 :
 					value === 4 ? styles.color4 :
