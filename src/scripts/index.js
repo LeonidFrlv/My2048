@@ -1,4 +1,5 @@
-const MAX_ROW_LENGTH = 4;
+import {WIN_NUM, MAX_ROW_LENGTH} from "../constants";
+
 
 const countY = (dir, arr) => {
 	let columns = [[], [], [], []];
@@ -9,9 +10,9 @@ const countY = (dir, arr) => {
 		})
 	})
 
-	columns = columns.map((row) => countX(dir === "up" ? "left" : "right", row));
+	columns = countX(dir === "up" ? "left" : "right", columns);
 
-	const buffer = [[], [], [], []]; //какие нафик два цикла, придумай чёт с этим
+	const buffer = [[], [], [], []]; //какие два цикла, придумай чёт с этим
 
 	columns.forEach(row => {
 		row.forEach((item, x) => {
@@ -22,25 +23,27 @@ const countY = (dir, arr) => {
 	return buffer;
 }
 
-const countX = (dir, row) => { // сюда должен не row передаваться, а arr и дальше с ним мутить всё, чтобы кода выше и ниже было меньше (лишние .map).
-	row = row.filter(item => item !== 0);
-
+const countX = (dir, arr) => {
 	const isRight = dir === "right";
 
-	let [start, end, step] = isRight ? [row.length - 1, -1, -1] : [0, row.length, 1]; // надо это переделать потому что непонятно что на экране вообще
+	return arr.map(row => {
+		row = row.filter(item => item !== 0);
 
-	for (let i = start; isRight ? i > end : i < end; i += step) {
-		if (row[i] !== row[i + 1]) continue;
-		row[i + 1] = row[i] + row[i + 1];
-		row.splice(i, 1);
-		end = row.length;
-	}
+		let [start, end, step] = isRight ? [row.length - 1, -1, -1] : [0, row.length, 1];
 
-	const emptyCellsAmount = MAX_ROW_LENGTH - row.length;
+		for (let i = start; isRight ? i > end : i < end; i += step) {
+			if (row[i] !== row[i + 1]) continue;
+			row[i + 1] = row[i] + row[i + 1];
+			row.splice(i, 1);
+			end = row.length;
+		}
 
-	row.splice(isRight ? 0 : row.length, 0, ...Array(emptyCellsAmount).fill(0));
+		const emptyCellsAmount = MAX_ROW_LENGTH - row.length;
 
-	return row;
+		row.splice(isRight ? 0 : row.length, 0, ...Array(emptyCellsAmount).fill(0));
+
+		return row;
+	})
 }
 
 const getRandomIndex = (cells) => {
@@ -61,7 +64,7 @@ const randomSpawn = (setCells) => {
 
 	setCells(prevCells => {
 		const randomItemIndex = getRandomIndex(prevCells);
-		if (!randomItemIndex) return;
+		if (!randomItemIndex) return prevCells;
 
 		const newCells = [...prevCells];
 		newCells[randomItemIndex.y][randomItemIndex.x] = value;
@@ -69,8 +72,26 @@ const randomSpawn = (setCells) => {
 	});
 }
 
-const gameOver = (cells) => {
-	return getRandomIndex(cells);
+const isGameWin = (cells) => {
+	for (let i = 0; i < cells.length; i++) {
+		if (cells[i].includes(WIN_NUM)) return true;
+	}
+
+	return false;
+}
+
+const isGameOver = (cells) => { // не очень оптимизировано, но работает, хы
+	let cellsCopy = copyArr(cells);
+
+	cellsCopy = countY("up", cellsCopy);
+	if (isCellsChanged(cells, cellsCopy)) return false;
+	cellsCopy = countY("down", cellsCopy);
+	if (isCellsChanged(cells, cellsCopy)) return false;
+	cellsCopy = countX("right", cellsCopy);
+	if (isCellsChanged(cells, cellsCopy)) return false;
+	cellsCopy = countX("left", cellsCopy);
+
+	return !isCellsChanged(cells, cellsCopy);
 }
 
 const isCellsChanged = (oldCells, cells) => {
@@ -86,7 +107,7 @@ const countRows = (dir, setCells, cells) => {
 
 	setCells(prevCells => {
 		if (dir === "up" || dir === "down") prevCells = countY(dir, [...prevCells]);
-		if (dir === "right" || dir === "left") prevCells = prevCells.map((row) => countX(dir, row));
+		if (dir === "right" || dir === "left") prevCells = countX(dir, [...prevCells]);
 
 		if (isCellsChanged(oldCells, prevCells)) randomSpawn(setCells);
 
@@ -94,4 +115,4 @@ const countRows = (dir, setCells, cells) => {
 	});
 }
 
-export {countRows, randomSpawn, gameOver, copyArr};
+export {countRows, randomSpawn, isGameOver, copyArr, isGameWin};

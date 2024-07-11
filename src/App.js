@@ -1,8 +1,8 @@
 import styles from './App.module.css';
 import GameField from "./components/GameField/GameField";
 import {useEffect, useState} from "react";
-import {countRows, gameOver, copyArr} from "./scripts";
-import {emptyCells, keyboardDown, keyboardLeft, keyboardRight, keyboardUp} from "./constants";
+import {countRows, isGameOver, copyArr, isGameWin} from "./scripts";
+import {emptyCells, keyboardDown, keyboardLeft, keyboardRight, keyboardUp, WIN_NUM} from "./constants";
 import StartButton from "./components/StartButton/StartButton";
 
 const Header = () => (
@@ -15,6 +15,7 @@ const Header = () => (
 function App() {
   const [cells, setCells] = useState(copyArr(emptyCells));
   const [game, setGame] = useState(false);
+  const [win, setWin] = useState(false);
 
   const getDirection = (key) => {
     if (keyboardUp[key]) return "up";
@@ -27,15 +28,28 @@ function App() {
     document.onkeyup = (e) => {
       if (!game) return;
       countRows(getDirection(e.key), setCells, cells);
-      setGame(gameOver(cells)); // вызывается когда игра ещё не проиграна, потому что сюда передаются старые cells. Должно вызываться когда игра не изменяется вообще, то есть иметь, таймаут?
     }
   });
+
+  useEffect(() => {
+    if (!game) return;
+    if (isGameWin(cells)) {
+      setWin(true);
+      setGame(false);
+      return;
+    }
+
+    if (isGameOver(cells)) setGame(false);
+
+
+  }, [game, cells])
 
   return (
     <div className={styles.appContainer}>
       <Header />
       <GameField cells={cells}/>
-      <StartButton game={game} setGame={setGame} setCells={setCells} />
+      {win && <h1>Вы победили!</h1>}
+      <StartButton game={game} setGame={setGame} setCells={setCells} setWin={setWin} />
     </div>
   );
 }
