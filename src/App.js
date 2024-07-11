@@ -2,7 +2,7 @@ import styles from './App.module.css';
 import GameField from "./components/GameField/GameField";
 import {useEffect, useState} from "react";
 import {countRows, isGameOver, copyArr, isGameWin} from "./scripts";
-import {emptyCells, keyboardDown, keyboardLeft, keyboardRight, keyboardUp, WIN_NUM} from "./constants";
+import {emptyCells, keyboardDown, keyboardLeft, keyboardRight, keyboardUp} from "./constants";
 import StartButton from "./components/StartButton/StartButton";
 
 const Header = () => (
